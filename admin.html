@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Safari Rush Uganda</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        /* Admin Panel Specific Styles */
+        .admin-container {
+            padding: 5rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-container h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #000000;
+            font-size: 2.5rem;
+        }
+
+        .admin-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .admin-controls label {
+            font-weight: bold;
+            color: #000000;
+        }
+
+        .admin-controls select,
+        .admin-controls input,
+        .admin-controls button {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .admin-controls button {
+            background: #f5a623;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .admin-controls button:hover {
+            background: #d48c1b;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+
+        .admin-table th,
+        .admin-table td {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .admin-table th {
+            background: #f5a623;
+            color: white;
+            font-weight: bold;
+        }
+
+        .admin-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .admin-table tr:hover {
+            background: #f0f0f0;
+        }
+
+        .admin-table input,
+        .admin-table textarea,
+        .admin-table select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .admin-table textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        .action-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-right: 0.5rem;
+        }
+
+        .edit-btn {
+            background: #3498db;
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background: #2980b9;
+        }
+
+        .save-btn {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .save-btn:hover {
+            background: #27ae60;
+        }
+
+        .delete-btn {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background: #c0392b;
+        }
+
+        #password-prompt {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+        }
+
+        .password-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .password-box input {
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .password-box button {
+            background: #f5a623;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .password-box button:hover {
+            background: #d48c1b;
+        }
+
+        .password-box p {
+            color: #e74c3c;
+            margin-top: 1rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Password Prompt -->
+    <div id="password-prompt">
+        <div class="password-box">
+            <h2>Admin Access</h2>
+            <input type="password" id="admin-password" placeholder="Enter Password">
+            <button onclick="checkPassword()">Login</button>
+            <p id="password-error">Incorrect password. Please try again.</p>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="admin-container" id="admin-panel" style="display: none;">
+        <h1>Admin Panel - Safari Rush Uganda</h1>
+        <div class="admin-controls">
+            <div>
+                <label for="filter-type">Filter by Type:</label>
+                <select id="filter-type">
+                    <option value="all">All</option>
+                    <option value="booking">Bookings</option>
+                    <option value="inquiry">Inquiries</option>
+                </select>
+            </div>
+            <div>
+                <label for="filter-tour">Filter by Tour:</label>
+                <select id="filter-tour">
+                    <option value="all">All Tours</option>
+                    <option value="Gorilla Trekking Adventure">Gorilla Trekking Adventure</option>
+                    <option value="Savanna Safari Experience">Savanna Safari Experience</option>
+                    <option value="Nile River Adventure">Nile River Adventure</option>
+                    <option value="Murchison Falls Safari">Murchison Falls Safari</option>
+                    <option value="Kidepo Valley Wilderness">Kidepo Valley Wilderness</option>
+                    <option value="Lake Mburo Getaway">Lake Mburo Getaway</option>
+                    <option value="Cultural Immersion Tour">Cultural Immersion Tour</option>
+                    <option value="Birdwatching Extravaganza">Birdwatching Extravaganza</option>
+                    <option value="Mount Elgon Hiking Expedition">Mount Elgon Hiking Expedition</option>
+                    <option value="Custom Tour">Custom Tour</option>
+                </select>
+            </div>
+            <div>
+                <label for="filter-date">Filter by Date:</label>
+                <input type="date" id="filter-date">
+            </div>
+            <div>
+                <button onclick="exportToCSV()">Export to CSV</button>
+            </div>
+        </div>
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Tour</th>
+                    <th>Date</th>
+                    <th>Guests</th>
+                    <th>Message/Custom Desc</th>
+                    <th>Timestamp</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="admin-table-body"></tbody>
+        </table>
+    </div>
+
+    <script type="module" src="assets/js/admin.js"></script>
+</body>
+</html>

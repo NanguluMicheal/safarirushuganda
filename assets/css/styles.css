@@ -1,0 +1,668 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    line-height: 1.6;
+    background: linear-gradient(45deg, #f5f5f5, #e0e0e0, #f5f5f5, #e0e0e0);
+    background-size: 400%;
+    animation: gradientAnimation 15s ease infinite;
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Layout and Structural Styles */
+header {
+    background: #000000;
+    color: white;
+    padding: 1rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo-img {
+    height: 50px;
+    width: auto;
+}
+
+.logo-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #f5a623;
+}
+
+.hamburger {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.hero {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../images/hero-background.jpg') center/cover no-repeat;
+    z-index: 1;
+    transform: scale(1.1);
+    transition: transform 0.1s ease;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 2;
+}
+
+.hero h1, .hero p, .hero .cta-button {
+    position: relative;
+    z-index: 3;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: zoomIn 1s ease-in;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    animation: zoomIn 1.5s ease-in;
+}
+
+.section {
+    padding: 5rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #000000;
+    font-size: 2.5rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.section h2::after {
+    content: '';
+    width: 50px;
+    height: 3px;
+    background: #f5a623;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.section h2::before {
+    content: '🌍';
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    color: #f5a623;
+}
+
+.tour-post, .blog-post {
+    padding-top: 100px;
+}
+
+.tour-post h1, .blog-post h1 {
+    font-size: 2.5rem;
+    color: #000000;
+    margin-bottom: 1rem;
+}
+
+.tour-post p, .blog-post p {
+    margin-bottom: 1rem;
+}
+
+.tour-post h2, .blog-post h2 {
+    font-size: 1.8rem;
+    color: #f5a623;
+    margin: 1.5rem 0 0.5rem;
+}
+
+.tour-post h3, .blog-post h3 {
+    font-size: 1.4rem;
+    color: #000000;
+    margin: 1rem 0 0.5rem;
+}
+
+.tour-post a, .blog-post a {
+    color: #f5a623;
+    text-decoration: none;
+}
+
+.tour-post a:hover, .blog-post a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    background: #000000;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+}
+
+footer a {
+    color: #f5a623;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #d48c1b;
+}
+
+footer button.cta-button {
+    margin-top: 1rem;
+    display: inline-block;
+}
+
+/* Component-Specific Styles */
+.cta-button {
+    background: #f5a623;
+    color: white;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: background 0.3s, transform 0.3s;
+    animation: zoomIn 2s ease-in;
+}
+
+.cta-button:hover {
+    background: #d48c1b;
+    transform: scale(1.05);
+}
+
+.why-travel-grid, .tours-grid, .blog-grid, .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.why-travel-card, .tour-card, .blog-card, .gallery-item {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+    border: 2px solid transparent;
+}
+
+.why-travel-card:hover, .tour-card:hover, .blog-card:hover, .gallery-item:hover {
+    transform: translateY(-10px) rotate(2deg);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    border: 2px solid #f5a623;
+}
+
+.tour-card a, .blog-card a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.why-travel-card h3, .tour-card h3, .blog-card h3 {
+    color: #f5a623;
+    margin-bottom: 0.5rem;
+}
+
+.tour-card img, .blog-card img, .tour-post-img, .blog-post-img, .gallery-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    transition: transform 0.3s;
+    loading: lazy;
+}
+
+.tour-post-img, .blog-post-img {
+    height: auto;
+    max-width: 800px;
+}
+
+.tour-card:hover img, .blog-card:hover img, .gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.read-more {
+    color: #f5a623;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
+#booking form, #contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+#booking label, #contact-form label {
+    font-weight: bold;
+    color: #000000;
+}
+
+#booking select, #booking input, #contact-form input, #contact-form textarea, #contact-form select {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+#booking input[type="date"], #booking input[type="number"], #booking input[type="tel"] {
+    width: 100%;
+}
+
+#booking textarea, #contact-form textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+#booking button, #contact-form button {
+    background: #f5a623;
+    color: white;
+    padding: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.3s;
+}
+
+#booking button:hover, #contact-form button:hover {
+    background: #d48c1b;
+    transform: scale(1.05);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.modal-content {
+    background: white;
+    max-width: 500px;
+    width: 90%;
+    margin: 5% auto;
+    padding: 2rem;
+    border-radius: 15px;
+    position: relative;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.modal-content h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    color: #000000;
+}
+
+.modal-content form {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+.modal-content form::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-content form::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.modal-content form::-webkit-scrollbar-thumb {
+    background: #f5a623;
+    border-radius: 3px;
+}
+
+.modal-content form::-webkit-scrollbar-thumb:hover {
+    background: #d48c1b;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #000000;
+    z-index: 1;
+}
+
+.modal-content button[type="submit"] {
+    margin-top: 1rem;
+    position: sticky;
+    bottom: 0;
+    background: #f5a623;
+    color: white;
+    padding: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.modal-content button[type="submit"]:hover {
+    background: #d48c1b;
+    transform: scale(1.05);
+}
+
+/* Gallery Section Styles */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+    border: 2px solid transparent;
+}
+
+.gallery-item:hover {
+    transform: translateY(-10px) rotate(2deg);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    border: 2px solid #f5a623;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    transition: transform 0.3s;
+    loading: lazy;
+    cursor: pointer;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.gallery-item p {
+    text-align: center;
+    padding: 1rem;
+    font-size: 1rem;
+    color: #000000;
+    background: rgba(255, 255, 255, 0.9);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    transition: background 0.3s;
+}
+
+.gallery-item:hover p {
+    background: rgba(245, 166, 35, 0.9);
+    color: white;
+}
+
+/* Lightbox Styles */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+#lightbox-img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.close-lightbox {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Animations */
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background: #000000;
+        width: 100%;
+        padding: 1rem;
+        text-align: center;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links a {
+        padding: 0.5rem 0;
+        font-size: 1.2rem;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+    }
+
+    .logo-img {
+        height: 40px;
+    }
+
+    .logo-title {
+        font-size: 1.2rem;
+    }
+
+    .section {
+        padding: 3rem 1rem;
+    }
+
+    .section h2 {
+        font-size: 2rem;
+    }
+
+    .tour-post h1, .blog-post h1 {
+        font-size: 2rem;
+    }
+
+    .tour-post h2, .blog-post h2 {
+        font-size: 1.5rem;
+    }
+
+    .tour-post h3, .blog-post h3 {
+        font-size: 1.2rem;
+    }
+
+    .cta-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .why-travel-grid, .tours-grid, .blog-grid, .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tour-post-img, .blog-post-img {
+        max-width: 100%;
+    }
+
+    .modal-content {
+        margin: 20% auto;
+        width: 90%;
+    }
+
+    #booking form, #contact-form {
+        padding: 0 1rem;
+    }
+
+    #booking input, #booking select, #booking textarea, #contact-form input, #contact-form select, #contact-form textarea {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .logo-title {
+        font-size: 1rem;
+    }
+
+    .logo-img {
+        height: 35px;
+    }
+
+    .section {
+        padding: 2rem 0.5rem;
+    }
+
+    .section h2 {
+        font-size: 1.8rem;
+    }
+
+    .tour-post h1, .blog-post h1 {
+        font-size: 1.8rem;
+    }
+
+    .tour-card img, .blog-card img, .gallery-item img {
+        height: 150px;
+    }
+}
